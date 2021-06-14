@@ -1,3 +1,13 @@
 from django.shortcuts import render
+from .models import gadgetAttr
 
-# Create your views here.
+
+def viewGadgets(request):
+ 
+    gadgets = gadgetAttr.objects.all()
+
+    context = {
+        'gadgets': gadgets
+
+    }
+    return render(request, 'gadgets/view_gadgets.html', context)
