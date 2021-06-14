@@ -13,7 +13,7 @@ def viewGadgets(request):
 
 
 def viewGadgetDetail(request, gadget_id):
-    gadget = get_object_or_404(gadgetAttr, asins='gadget_id')
+    gadget = get_object_or_404(gadgetAttr, asins=gadget_id)
 
     context = {
         'gadget': gadget
