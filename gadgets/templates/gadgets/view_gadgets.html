@@ -2,18 +2,30 @@
 {% load static %}
 
 {% block content %}
-    {% for gadget in gadgets %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <h3>{{ gadget.name }}</h3>
-                <h3>{{ gadget.asins }}</h3>
-                <h3>{{ gadget.dimensions }}</h3>
-                <h3>{{ gadget.brand }}</h3>
-            </div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            {% for gadget in gadgets %}
+            <a href="{% url 'gadget_details' gadget.asins %}">
+                <div class="card-group">
+                    <div class="card">
+                        <img src="{{ gadget.imageurls }}" class="card-img-top" alt="{{ gadget.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ gadget.name }}</h5>
+                            <p class="card-text">{{ gadget.brand }}</p>
+                            <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
 
         </div>
 
     </div>
-    {% endfor %}
+
+</div>
+
 {% endblock %}

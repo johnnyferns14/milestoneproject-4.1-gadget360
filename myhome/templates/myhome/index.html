@@ -1,34 +1,9 @@
 {% extends 'base.html' %}
 
-{% block content%}
-<h1>This is my homepage</h1>
+{% block content %}
 
-<section>
-    <div class=container>
-        <div class="row">
-            {% for product in products %}
-            <div class="col-md-4">{{product.a}}</div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
+    <section>
+        <h1>Get one for yourself<a href="{% url 'gadgets_view'%}">BUY NOW!!!</a></h1>
+    </section>
 
-<section>
-    <div class="card-group">
-        {% for product in products %}
-        <div class="card">   
-          <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{product.product_title}}</h5>
-                <p class="card-text">{{product.product_descripton}}</p>
-                <p class="card-text">{{product.product_price}}</p>
-                <p class="card-text">{{product.product_quantity}}</p>
-                <a href="#" class="btn btn-primary">Add to cart</a>
-                <a href="{% url 'addToWishlist' %}" class="btn btn-primary">Add to Wishlist</a>               
-            </div>    
-        </div>
-        {% endfor %}
-    </div>
-
-</section>
 {% endblock %}
