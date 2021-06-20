@@ -2,7 +2,46 @@
 
 {% block content %}
 
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product Detail</th>
+      <th scope="col"></th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Sub Total</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+      {%for item in cart_items%}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>
+          <img src="{{ item.product.imageurls }}" alt="{{ item.product.name }}">
+      </td>
+      <td>
+          <p>{{ item.product.name }}</p>
+      </td>
+      <td>
+          <p>{{ item.product.price }}</p>
+      </td>
+      <td>
+          <p>{{ item.quantity }}</p>
+      </td>
+      <td>
+          <p>{{total|floatformat:2}}</p>
+      </td>
+      <td>
+          <p>{{grand_total|floatformat:2}}</p>
+      </td>
+    </tr>
+    {% endfor %}
+    
+  </tbody>
+</table>
+
     <h3>Keep Shopping</h3>
-    {{ cart_items }}
 
 {% endblock %}
