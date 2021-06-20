@@ -3,25 +3,44 @@
 
 {% block content %}
 
-<p>Image details</p>
+<h1>Product details</h1>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <img src="{{ gadget.imageurls }}">
         </div>
-        <div class="col-md-4">
-                <h4>{{ gadget.name }}</h4>
-                <h6>{{ gadget.description }}</h6>
-                <p>Brand: {{ gadget.brand }}</p>
-                <p>Dimensions: {{ gadget.dimensions }}</p>
-                <p>ASIN: {{ gadget.asins }}</p>
-                <p>Price: {{ gadget.price }}</p>
-        </div>
-        <div class="col-md-4">
-            <h6>Buying area</h6>
+        <div class="col-md-5">
+            <h4>{{ gadget.name }}</h4>
+            <h6>{{ gadget.description }}</h6>
+            <p>Brand: {{ gadget.brand }}</p>
+            <p>Dimensions: {{ gadget.dimensions }}</p>
+            <p>ASIN: {{ gadget.asins }}</p>
+            <h6>Price: {{ gadget.price }}</h6>
+            <form class="form" method="POST" action="{% url 'add_to_cart' gadget.asins %}">
+                {% csrf_token %}
+                <div class="form-row w-50">
+                    <div class="col-md-12">
+                        <p>Quantity:</p>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control" type="number" , name="quantity" , value="1" , min="1" ,
+                                    max="99" , data-item_id="{{ gadget.asins }}" , id="id_qty_{{ gadget.asins }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <a href="{% url 'gadgets_view' %}">Keep Shopping</a>
+                        <input class="btn btn-primary" type="submit", value="Add To Cart">
+                    </div>
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                </div>
+
+
+            </form>
         </div>
 
     </div>
+</div>    
     <section class="comments-few">
         <h3>Customer Reviews</h3>
         <div class="card">
@@ -30,11 +49,11 @@
             </div>
         </div>
 
-        <div class="show-reviewss">
-            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">More reviews</a>
+        <div class="show-reviews">
+            <a href="{% url 'product_review'%}" class="btn btn-primary btn-lg active" role="button"
+                aria-pressed="true">More reviews</a>
         </div>
 
     </section>
-</div>
 
 {% endblock %}

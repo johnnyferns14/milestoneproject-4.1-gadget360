@@ -9,7 +9,8 @@ class gadgetCategory(models.Model):
 
 
 class gadgetAttr(models.Model):
-    category = models.ForeignKey(gadgetCategory, null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey(gadgetCategory, null=True, blank=True,
+                                on_delete=models.SET_NULL)
     asins = models.CharField(max_length=22)
     name = models.CharField(max_length=254)
     description = models.TextField()

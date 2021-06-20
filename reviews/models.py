@@ -1,4 +1,4 @@
 from django.db import models
+from gadgets.models import gadgetAttr
+from django.contrib.auth.models import User
 
-class review(models.Model):
-    reviews_title = models.CharField(max_length=50)
