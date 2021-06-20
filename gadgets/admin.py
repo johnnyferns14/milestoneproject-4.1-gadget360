@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import gadgetAttr
+from .models import gadgetAttr, gadgetCategory
 
 
 class gadgetAttrAdmin(admin.ModelAdmin):
     list_display = (
+        'category',
         'name',
         'brand',
         'asins',
@@ -16,3 +17,4 @@ class gadgetAttrAdmin(admin.ModelAdmin):
 
 
 admin.site.register(gadgetAttr, gadgetAttrAdmin)
+admin.site.register(gadgetCategory)

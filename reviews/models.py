@@ -1,3 +1,4 @@
 from django.db import models
 
-# Create your models here.
+class review(models.Model):
+    reviews_title = models.CharField(max_length=50)
