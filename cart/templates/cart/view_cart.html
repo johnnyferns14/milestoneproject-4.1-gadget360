@@ -2,46 +2,59 @@
 
 {% block content %}
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Product Detail</th>
-      <th scope="col"></th>
-      <th scope="col">Price</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Sub Total</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-      {%for item in cart_items%}
-    <tr>
-      <th scope="row">{{ forloop.counter }}</th>
-      <td>
-          <img src="{{ item.product.imageurls }}" alt="{{ item.product.name }}">
-      </td>
-      <td>
-          <p>{{ item.product.name }}</p>
-      </td>
-      <td>
-          <p>{{ item.product.price }}</p>
-      </td>
-      <td>
-          <p>{{ item.quantity }}</p>
-      </td>
-      <td>
-          <p>{{total|floatformat:2}}</p>
-      </td>
-      <td>
-          <p>{{grand_total|floatformat:2}}</p>
-      </td>
-    </tr>
-    {% endfor %}
-    
-  </tbody>
-</table>
+<div class="container">
+    {% if cart_items %}
 
-    <h3>Keep Shopping</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product Detail</th>
+                <th scope="col"></th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Sub Total</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for item in cart_items%}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>
+                    <img class="img-fluid w-50" src="{{ item.product.imageurls }}" alt="{{ item.product.name }}">
+                </td>
+                <td>
+                    <p>{{ item.product.name }}</p>
+                </td>
+                <td>
+                    <p>{{ item.product.price }}</p>
+                </td>
+                <td>
+                    <p>{{ item.quantity }}</p>
+                </td>
+                <td>
+                    <p>{{total|floatformat:2}}</p>
+            </tr>
+
+            <td>
+                <h6>Total: {{ total|floatformat:2 }}</h6>
+                <h6>Delivery: {{ delivery|floatformat:2 }}</h6>
+                <h6>Grand Total: {{ grand_total|floatformat:2 }}</h6>
+                {% if free_delivery_target > 0 %}
+                <p>You need to spend more {{ free_delivery_target }} to avail free delivery. </p>
+                {% endif %}
+            </td>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+    {% else %}
+    <p>Your bag is empty</p>
+    {% endif %}
+</div>
+
+<h3>Keep Shopping</h3>
 
 {% endblock %}
