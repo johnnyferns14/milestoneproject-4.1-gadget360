@@ -37,6 +37,7 @@
                     <p>{{total|floatformat:2}}</p>
             </tr>
 
+            <tr>
             <td>
                 <h6>Total: {{ total|floatformat:2 }}</h6>
                 <h6>Delivery: {{ delivery|floatformat:2 }}</h6>
@@ -46,6 +47,14 @@
                 {% endif %}
             </td>
             {% endfor %}
+            </tr>
+            <tr>
+                <td>
+                <a href="{% url 'gadgets_view' %}" class="btn btn-primary">Keep Shopping</a>
+                <a href="#" class="btn btn-primary">Secure Checkout</a>
+                </td>
+
+            </tr>
 
         </tbody>
     </table>
