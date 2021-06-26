@@ -2,7 +2,7 @@ from django import forms
 from .models import OrderDetail
 
 
-class OrferForm(forms.ModelForm):
+class OrderForm(forms.ModelForm):
     class Meta:
         model = OrderDetail
         fields = ('cust_name', 'email_id', 'contact_number', 'address1',

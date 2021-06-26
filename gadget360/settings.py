@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'cart',
     'reviews',
     'checkout',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -78,11 +79,17 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'cart.contexts.cartItems',
             ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field'
+            ]
         },
     },
 ]
 
 SITE_ID = 1
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
