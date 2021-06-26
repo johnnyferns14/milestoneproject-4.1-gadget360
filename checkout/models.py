@@ -25,7 +25,8 @@ class OrderDetail(models.Model):
         return uuid.uuid4().hex.upper()
 
     def update_total(self):
-        self.order_total = self.lineitems.aggregate(Sum('total_lineitem'))['total_lineitem__sum']
+        self.order_total = self.lineitems.aggregate(Sum('total_lineitem'))[
+                                                        'total_lineitem__sum']
 
         if self.order_total < settings.FREE_DELIVERY_LIMIT:
             self.delivery_cost = self.order_total * settings.STANDARD_DELIVERY_RATE / 100
