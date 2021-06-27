@@ -2,8 +2,90 @@
 
 {% block content %}
 
+    <h1>Secure Checkout</h1>
+
     <h3>Please fill out the form</h3>
 
-    
+    <div class="row">
+        <p>Order Summary </p>
+        <div>
+            <p>Item</p>
+        </div>
+        <div>
+            <p>SubTotal</p>
+        </div>
+    </div>
+    {% for item in cart_iems %}
+        <div class="row">
+            <div>
+                <a href="{% url 'gadget_details' item.product.asins %}">
+                    {% if item.product.image %}
+                        <img src="{{ item.product.imageurls }}" alt="{{ item.product.name }}">
+                    {% else %}
+                        <img src="{{ item.product.imageurls }}" alt="{{ item.product.name }}">
+                    {% endif %}
+                </a>
+            </div>
+            <div>
+                <p>{{ item.product.name }}</p>
+                <p>{{ item.quantity }}</p>
+
+            </div>
+        </div>
+            
+    {% endfor %}
+    <div class="row">
+        <div>
+            <p>Order Total:</p>
+            <p>Delivery Charge:</p>
+            <p>Grand Total:</p>
+        </div>
+        <div>
+            <p>{{ total | floatformat:2 }}</p>
+            <p>{{ delivery | floatformat:2 }}</p>
+            <p>{{ grand_total | floatformat:2 }}</p>
+        </div>
+    </div>
+
+    <form action="{% url 'checkout' %" method="POST" id="payment-form">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Customer Information</legend>
+            {{order_form.cust_name | as_crispy_field }}
+            {{order_form.email_id | as_crispy_field }}
+        </fieldset>
+        <fieldset>
+            <legend>Delivery Details</legend>
+            {{order_form.contact_number | as_crispy_field }}
+            {{order_form.address1 | as_crispy_field }}
+            {{order_form.address2 | as_crispy_field }}
+            {{order_form.town_or_city | as_crispy_field }}
+            {{order_form.postcode | as_crispy_field }}
+            {{order_form.country | as_crispy_field }}
+            {{order_form.county | as_crispy_field }}
+            <div class ="form-check form-check-inline">
+                {% if user.is_authenticated:}
+                    <label class="form-check-label" for="id-save-info">Save my info. for future use</label>
+                    <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info"checked>
+                {% else %}
+                    <label class="form-check-label" for="id-save-info">
+                        <a class = "text-info" href="{% url 'account_signup' %}">Create account</a>
+                        <a class = "text-info" href="{% url 'account_login' %}">Sign In</a>to save your details.
+                    </label>
+                {endif}
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Payment Details</legend>
+            <div id="card-element"></div>
+            <div class="text-danger" id="card-errors" role="alert"></div>
+        </fieldset>
+        
+        <div>
+            <a href="{% url 'view_cart' %}" class="btn btn-primary">Modify Cart</a>
+            <button id="submit-button" class="btn btn-primary">Confirm Order</button>
+            <p>You will be charged a total of £{{ grand_total| floatformat:2 }}</p>
+        </div>
+    </form>
 
 {% endblock %}
