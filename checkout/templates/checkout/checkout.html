@@ -64,7 +64,7 @@
             {{order_form.country | as_crispy_field }}
             {{order_form.county | as_crispy_field }}
             <div class ="form-check form-check-inline">
-                {% if user.is_authenticated:}
+                {% if user.is_authenticated %}
                     <label class="form-check-label" for="id-save-info">Save my info. for future use</label>
                     <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info"checked>
                 {% else %}
@@ -72,7 +72,7 @@
                         <a class = "text-info" href="{% url 'account_signup' %}">Create account</a>
                         <a class = "text-info" href="{% url 'account_login' %}">Sign In</a>to save your details.
                     </label>
-                {endif}
+                {% endif %}
             </div>
         </fieldset>
         <fieldset>
