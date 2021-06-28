@@ -5,8 +5,8 @@ from django.utils import timezone
 
 
 class ProductReview(models.Model):
-    gaadget = models.ForeignKey(gadgetAttr, null=True,
-                                blank=True, on_delete=models.CASCADE)
+    gadget = models.ForeignKey(gadgetAttr, null=True,
+                               blank=True, on_delete=models.CASCADE)
     customer = models.ForeignKey(User, null=False,
                                  blank=False, on_delete=models.CASCADE)
     review_title = models.CharField(max_length=150, blank=False)
