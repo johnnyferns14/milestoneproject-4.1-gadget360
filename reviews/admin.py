@@ -6,7 +6,7 @@ from reviews.models import ProductReview
 class ProductReviewAdmin(admin.ModelAdmin):
     list_display = (
         'gadget',
-        'customer',
+        'cust_name',
         'review_title',
         'review_description',
         'date_added',

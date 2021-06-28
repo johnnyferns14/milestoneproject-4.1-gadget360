@@ -8,8 +8,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    {% block corecss %}
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    {% endblock %}
+
+    {% block extracss %}
+    {% endblock %}
 
     <title>Gadget360</title>
   </head>
@@ -52,6 +57,7 @@
     {% if messages %}
         <div class="message-wrapper">
             {% for message in messages %}
+                {% include 'includes/toasts/toast_success.html' %}
                 
             {% endfor %}
             
@@ -72,6 +78,9 @@
     <script src="https://js.stripe.com/v3/"></script>
 
     {% block postloadjs %}
+    <script type="text/javascript">
+    $('.toast').toast('show');
+    </script>
     
     {% endblock %}
   </body>

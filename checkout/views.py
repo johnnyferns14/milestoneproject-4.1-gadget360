@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.conf import settings
 
 from .forms import OrderForm
 from gadgets.models import gadgetAttr
-from .models import OrderLineItem
+from .models import OrderDetail, OrderLineItem
 from cart.contexts import cartItems
 
 import stripe
@@ -70,6 +70,24 @@ def checkout(request):
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret
+    }
+
+    return render(request, template, context)
+
+
+def checkout_success(request, order_number):
+    save_info = request.session.get('save_info')
+    order = get_object_or_404(OrderDetail, order_number=order_number)
+    messages.success(request, f'Order {order_number} created succesfully. \
+                     A confirmation email will be sent to {order.email}')
+    
+    if 'cart' in request.session:
+        del request.session['cart']
+    
+    template = 'checkout/checkout_success.html'
+
+    context = {
+        'order': order
     }
 
     return render(request, template, context)

@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
+{% load static %}
+
+
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="{% static 'myhome/home.css' %}">
+{% endblock %}
 
 {% block content %}
 
+    <div class="bgimage">
+        <img src="{% static 'myhome/images/bg-image.jpg' %}" alt="gadget-wallpaper">
+    </div>
+
+
     <section>
-        <h1>Get one for yourself<a href="{% url 'gadgets_view'%}">BUY NOW!!!</a></h1>
+        <h1 class="cust-color">Get one for yourself<a href="{% url 'gadgets_view'%}">BUY NOW!!!</a></h1>
     </section>
 
 {% endblock %}
